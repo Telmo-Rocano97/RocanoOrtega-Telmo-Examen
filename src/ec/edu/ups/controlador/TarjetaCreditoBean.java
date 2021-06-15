@@ -1,6 +1,7 @@
 package ec.edu.ups.controlador;
 
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +10,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import ec.edu.ups.ejb.TarjetaCreditoFacade;
 import ec.edu.ups.entidad.TarjetaCredito;
@@ -23,12 +26,10 @@ public class TarjetaCreditoBean implements Serializable {
 	@EJB
 	private TarjetaCreditoFacade ejbTarjetaCreditoFacade;
 	private List<TarjetaCredito> list;
-	
-	
-	private int numeroTrajeta;
+	private String numeroTarjeta;
 	private String nombreTitular;
-	private String fechaCaducidad;	
-	private double codigoVerificacion;
+	private String fechaCaducidad;
+	private int codigoVerificacion;
 	
 	private boolean log;
 
@@ -74,12 +75,9 @@ public class TarjetaCreditoBean implements Serializable {
 	}
 
 	
-	public int getNumeroTrajeta() {
-		return numeroTrajeta;
-	}
 
-	public void setNumeroTrajeta(int numeroTrajeta) {
-		this.numeroTrajeta = numeroTrajeta;
+	public void setNumeroTarjeta(String numeroTarjeta) {
+		this.numeroTarjeta = numeroTarjeta;
 	}
 
 	public String getNombreTitular() {
@@ -90,6 +88,19 @@ public class TarjetaCreditoBean implements Serializable {
 		this.nombreTitular = nombreTitular;
 	}
 
+	
+
+	public TarjetaCreditoFacade getEjbTarjetaCreditoFacade() {
+		return ejbTarjetaCreditoFacade;
+	}
+
+	public void setEjbTarjetaCreditoFacade(TarjetaCreditoFacade ejbTarjetaCreditoFacade) {
+		this.ejbTarjetaCreditoFacade = ejbTarjetaCreditoFacade;
+	}
+
+	
+
+
 	public String getFechaCaducidad() {
 		return fechaCaducidad;
 	}
@@ -98,19 +109,25 @@ public class TarjetaCreditoBean implements Serializable {
 		this.fechaCaducidad = fechaCaducidad;
 	}
 
+	public String getNumeroTarjeta() {
+		return numeroTarjeta;
+	}
+
 	public double getCodigoVerificacion() {
 		return codigoVerificacion;
 	}
 
-	public void setCodigoVerificacion(double codigoVerificacion) {
+	public void setCodigoVerificacion(int codigoVerificacion) {
 		this.codigoVerificacion = codigoVerificacion;
 	}
 
+	/*
 	public String add() {
-		ejbTarjetaCreditoFacade.create(new TarjetaCredito(this.numeroTrajeta, this.nombreTitular, this.fechaCaducidad, this.codigoVerificacion));
+		ejbTarjetaCreditoFacade.create(new TarjetaCredito(this.numeroTarjeta, this.nombreTitular, this.fechaCaducidad,this.codigoVerificacion));
 		list = ejbTarjetaCreditoFacade.findAll();
 		return null;
 	}
+	*/
 
 	public String delete(TarjetaCredito c) {
 		ejbTarjetaCreditoFacade.remove(c);
@@ -118,6 +135,7 @@ public class TarjetaCreditoBean implements Serializable {
 		return null;
 	}
 
+	/*
 	public String edit(TarjetaCredito c) {
 		c.setEditable(true);
 		return null;
@@ -128,6 +146,7 @@ public class TarjetaCreditoBean implements Serializable {
 		c.setEditable(false);
 		return null;
 	}
+	*/
 
 	public TarjetaCreditoFacade getEjbCategoryFacade() {
 		return ejbTarjetaCreditoFacade;

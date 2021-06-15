@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Categorías</title>
+	<style>
+		.tabla {
+			border-collapse: collapse;
+		}
+		
+		.cabeceraTabla {
+			text-align: center;
+			background: none repeat scroll 0 0 #E5E5E5;
+			border-bottom: 1px solid #BBBBBB;
+			padding: 8px;
+		}
+		
+		.filaPar {
+			text-align: center;
+			background: none repeat scroll 0 0 #FFFFFFF;
+			border-top: 1px solid #BBBBBB;
+		}
+		
+		.filaImpar {
+			text-align: center;
+			background: none repeat scroll 0 0 #F9F9F9;
+			border-top: 1px solid #BBBBBB;
+		}
+	</style>
+</h:head>
+<h:body>
+	<h3>Gestión de categorias</h3>
+	<h:form>
+		<h:dataTable value="#{categoryBean.list}" var="c" styleClass="tabla"
+			headerClass="cabeceraTabla" rowClasses="filaPar,filaImpar">
+			<h:column>
+				<f:facet name="header">Codigo</f:facet>#{c.codigo}</h:column>
+			<h:column>
+				<f:facet name="header">Descripción</f:facet>
+				<h:inputText value="#{c.descripcion}" size="10"
+					rendered="#{c.editable}" />
+				<h:outputText value="#{c.descripcion}" rendered="#{not c.editable}" />
+			</h:column>			
+			<h:column>
+				<f:facet name="header">Accion</f:facet>
+				<h:commandLink value="Delete" action="#{categoryBean.delete(c)}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Accion</f:facet>
+				<h:commandLink value="Edit" action="#{categoryBean.edit(c)}"
+					rendered="#{not c.editable}" />
+				<h:commandLink value="Save" action="#{categoryBean.save(c)}"
+					rendered="#{c.editable}" />
+			</h:column>
+		</h:dataTable>
+		<ul>
+			<li>Descripción:<h:inputText size="10" value="#{categoryBean.descripcion}"/></li>
+		</ul>
+		<h:commandButton value="Add" action="#{categoryBean.add}" />
+	</h:form>
+</h:body>
+</html>

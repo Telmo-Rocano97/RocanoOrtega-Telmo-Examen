@@ -1,89 +1,81 @@
 package ec.edu.ups.entidad;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
-public class Comida  implements Serializable {
+@Table(name = "Comidas")
+public class Comida implements Serializable{
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int codigo;
-    private String nombre;
-    private double precioUnitario;
-    @OneToMany(mappedBy = "comida")
-    private List<Pedido> pedido;
-    @Transient
-    private boolean editable;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
-	 public Comida() {
-	    	super();
-	    }
-	 
-	public Comida(String nombre, double precioUnitario) {
-		super();
+	@Id
+	@SequenceGenerator(name = "com_id_seq", sequenceName = "com_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "com_id_seq")
+	@Column(name = "com_id", updatable = false, nullable = false, unique = true)
+	private int id;
+	
+	@Column(name = "com_nombre", length = 250, nullable = false)
+	private String nombre;
+	
+	@Column(name = "com_precio", nullable = false)
+	private double precio;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "com_pedido")
+	private Pedido pedido;
+	
+	public Comida() {
+		// TODO Auto-generated constructor stub
+	}
+	public Comida(String nombre, double precio) {
 		this.nombre = nombre;
-		this.precioUnitario = precioUnitario;
+		this.precio = precio;	}
+	public int getId() {
+		return id;
 	}
-
-
-	public int getCodigo() {
-		return codigo;
+	public void setId(int id) {
+		this.id = id;
 	}
-
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-
-
 	public String getNombre() {
 		return nombre;
 	}
-
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-
-	public double getPrecioUnitario() {
-		return precioUnitario;
+	public double getPrecio() {
+		return precio;
 	}
-
-
-	public void setPrecioUnitario(double precioUnitario) {
-		this.precioUnitario = precioUnitario;
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
-
-
-	public List<Pedido> getPedido() {
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	public Pedido getPedido() {
 		return pedido;
 	}
-
-
-	public void setPedido(List<Pedido> pedido) {
+	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
-
-
-	public boolean isEditable() {
-		return editable;
+	@Override
+	public String toString() {
+		return "Comida [id=" + id + ", nombre=" + nombre + ", precio=" + precio + "]";
 	}
 
-
-	public void setEditable(boolean editable) {
-		this.editable = editable;
-	}
-	 
-	 
 }

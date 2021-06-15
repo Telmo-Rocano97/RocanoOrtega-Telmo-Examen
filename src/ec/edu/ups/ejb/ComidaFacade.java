@@ -22,5 +22,19 @@ public class ComidaFacade extends AbstractFacade<Comida> {
         return em;
     }
 
+    public double calularSubTotal(int codigo) {
+    	String jpql = "SELECT SUM(C.precioUnitario) FROM Comida AS c WHERE c.pedido.numero = " + codigo;
+    	Double subtotal = (Double) em.createQuery(jpql).getSingleResult();
+    	return subtotal;   	
+    }
+    
+	public Comida search(String nombre) {
+		
+		Comida comida = new Comida();
+		String sql = ("Select c From Comida c Where com_nombre =:nombre");
+		comida = (Comida) em.createQuery(sql,Comida.class).setParameter("nombre", nombre).getSingleResult();
+		return comida; 
+	}
+    
 }
 

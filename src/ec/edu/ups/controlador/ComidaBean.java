@@ -91,6 +91,7 @@ public class ComidaBean implements Serializable {
 		return null;
 	}
 
+	/*
 	public String edit(Comida c) {
 		c.setEditable(true);
 		return null;
@@ -101,4 +102,5 @@ public class ComidaBean implements Serializable {
 		c.setEditable(false);
 		return null;
 	}
+	*/
 }

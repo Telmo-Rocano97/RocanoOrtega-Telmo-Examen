@@ -1,133 +1,75 @@
 package ec.edu.ups.entidad;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
-public class TarjetaCredito implements Serializable {
+@Table(name = "TCreditos")
+public class TarjetaCredito implements Serializable{
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int numero;
-	private int numeroTrajeta;
-	private String nombreTitular;
-	private String fechaCaducidad;	
-	private double codigoVerificacion;
-	 @OneToMany(mappedBy = "tarjetaCredito")
-	 @ManyToOne
-	 private Comida comida;
-	 @ManyToOne
-	 private Comida Pedido;
-	@Transient
-    private boolean editable;
-
-	 public TarjetaCredito() {
-	    	super();
-	    }
-	 
-	public TarjetaCredito(int numeroTrajeta, String nombreTitular, String fechaCaducidad, double codigoVerificacion) {
-		super();
-		this.numeroTrajeta = numeroTrajeta;
-		this.nombreTitular = nombreTitular;
-		this.fechaCaducidad = fechaCaducidad;
-		this.codigoVerificacion = codigoVerificacion;
-	}
-
-
-	public int getNumeroTrajeta() {
-		return numeroTrajeta;
-	}
+	@SequenceGenerator(name = "tcr_id_seq", sequenceName = "tcr_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tcr_id_seq")
+	@Column(name = "tcr_id", updatable = false, unique = true, nullable = false)
+	private int id;	
 	
-	public void setNumeroTrajeta(int numeroTrajeta) {
-		this.numeroTrajeta = numeroTrajeta;
+	@Column(name = "tcr_titular", length = 250, nullable = false)
+	private String titular;
+	
+	@Column(name = "tcr_caducidad", nullable = false)
+	private Date caducidad;
+	
+	@Column(name = "trc_cvv", length = 3, unique = true, nullable = false)
+	private int cvv;
+	
+	public TarjetaCredito() {
+		// TODO Auto-generated constructor stub
 	}
-
-
-
-
-	public int getNumero() {
-		return numero;
+	public TarjetaCredito(String titular, Date caducidad, int cvv) {
+		this.titular = titular;
+		this.caducidad = caducidad;
+		this.cvv = cvv;
 	}
-
-
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public int getId() {
+		return id;
 	}
-
-
-	public String getNombreTitular() {
-		return nombreTitular;
+	public void setId(int id) {
+		this.id = id;
 	}
-
-
-	public void setNombreTitular(String nombreTitular) {
-		this.nombreTitular = nombreTitular;
+	public String getTitular() {
+		return titular;
 	}
-
-
-	public String getFechaCaducidad() {
-		return fechaCaducidad;
+	public void setTitular(String titular) {
+		this.titular = titular;
 	}
-
-
-	public void setFechaCaducidad(String fechaCaducidad) {
-		this.fechaCaducidad = fechaCaducidad;
+	public Date getCaducidad() {
+		return caducidad;
 	}
-
-
-	public double getCodigoVerificacion() {
-		return codigoVerificacion;
+	public void setCaducidad(Date caducidad) {
+		this.caducidad = caducidad;
 	}
-
-
-	public void setCodigoVerificacion(double codigoVerificacion) {
-		this.codigoVerificacion = codigoVerificacion;
+	public int getCvv() {
+		return cvv;
 	}
-
-
-
-	public Comida getComida() {
-		return comida;
+	public void setCvv(int cvv) {
+		this.cvv = cvv;
 	}
-
-
-	public void setComida(Comida comida) {
-		this.comida = comida;
+	@Override
+	public String toString() {
+		return "TarjetaCredito [id=" + id + ", titular=" + titular + ", caducidad=" + caducidad + ", cvv=" + cvv + "]";
 	}
-
-
-	public Comida getPedido() {
-		return Pedido;
-	}
-
-
-	public void setPedido(Comida pedido) {
-		Pedido = pedido;
-	}
-
-
-	public boolean isEditable() {
-		return editable;
-	}
-
-
-	public void setEditable(boolean editable) {
-		this.editable = editable;
-	}
-
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	} 
-
-	 
 	
 }
