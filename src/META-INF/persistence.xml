@@ -6,13 +6,14 @@
 	<persistence-unit name="RocanoOrtega-Telmo-Examen"
 		transaction-type="JTA">
 		<jta-data-source>jdbc/__ejemplo</jta-data-source>
-		<class>ec.edu.ups.entidad.Comida</class>
-		<class>ec.edu.ups.entidad.Pedido</class>
-		<class>ec.edu.ups.entidad.TarjetaCredito</class>
+		<class>ec.edu.ups.entidades.Cliente</class>
+		<class>ec.edu.ups.entidades.Reserva</class>
+		<class>ec.edu.ups.entidades.Restuarante</class>
 		<properties>
-			<property 
+			<property
 				name="javax.persistence.schema-generation.database.action"
-				value="create" />				
+				value="create" />
 		</properties>
+
 	</persistence-unit>
 </persistence>
