@@ -1,50 +1,49 @@
 package ec.edu.ups.entidades;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
-
 
 /**
  * Entity implementation class for Entity: Reserva
  *
  */
 @Entity
-
 public class Reserva implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name = "id_reserva")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	/*
-	  	e. Luego, debe ingresar el nÃºmero de personas, la fecha y la hora de la reserva.
+	  	e. Luego, debe ingresar el número de personas, la fecha y la hora de la reserva.
 	 
 	 */
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar fecha;
+	
 	private int numeroPersonas;
 	
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "cedula_colum")
 	private Cliente clienteReserva;
 	
 	@ManyToOne
-	@JoinColumn
-	private Restuarante restauranteReserva;
+	@JoinColumn(name = "id_colum")
+	private Restaurante restauranteReserva;
 	
 	public Reserva() {
 		super();
 	}
 
-	public Reserva(int id, Calendar fecha, int numeroPersonas, Cliente clienteReserva, Restuarante restauranteReserva) {
+	public Reserva(int id, Calendar fecha, int numeroPersonas, Cliente clienteReserva, Restaurante restauranteReserva) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
@@ -53,7 +52,7 @@ public class Reserva implements Serializable {
 		this.restauranteReserva = restauranteReserva;
 	}
 	
-	public Reserva(int id, Calendar fecha, int numeroPersonas, Restuarante restauranteReserva) {
+	public Reserva(int id, Calendar fecha, int numeroPersonas, Restaurante restauranteReserva) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
@@ -69,14 +68,13 @@ public class Reserva implements Serializable {
 		this.clienteReserva = clienteReserva;
 	}
 
-	public Reserva(Calendar fecha, int numeroPersonas, Cliente clienteReserva, Restuarante restauranteReserva) {
+	public Reserva(Calendar fecha, int numeroPersonas, Cliente clienteReserva, Restaurante restauranteReserva) {
 		super();
 		this.fecha = fecha;
 		this.numeroPersonas = numeroPersonas;
 		this.clienteReserva = clienteReserva;
 		this.restauranteReserva = restauranteReserva;
 	}
-	
 
 	public int getId() {
 		return id;
@@ -110,11 +108,11 @@ public class Reserva implements Serializable {
 		this.clienteReserva = clienteReserva;
 	}
 
-	public Restuarante getRestauranteReserva() {
+	public Restaurante getRestauranteReserva() {
 		return restauranteReserva;
 	}
 
-	public void setRestauranteReserva(Restuarante restauranteReserva) {
+	public void setRestauranteReserva(Restaurante restauranteReserva) {
 		this.restauranteReserva = restauranteReserva;
 	}
 

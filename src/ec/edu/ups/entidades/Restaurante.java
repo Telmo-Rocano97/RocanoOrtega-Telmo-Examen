@@ -7,22 +7,24 @@ import java.util.List;
 import javax.persistence.*;
 
 /**
- * Entity implementation class for Entity: Restuarante
+ * Entity implementation class for Entity: Restaurante
  *
  */
 @Entity
 
-public class Restuarante implements Serializable {
+public class Restaurante implements Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
+
 	@Id
+	@Column(name = "id_colum")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	/*
-	  	Un restaurante puede registrarse en la aplicaci√≥n. Para lo cu√°l,
-		debe ingresar los siguientes datos: nombre, direcci√≥n, tel√©fono y m√°ximo n√∫mero de aforo
+	  	Un restaurante puede registrarse en la aplicaciÛn. Para lo cu·l,
+		debe ingresar los siguientes datos: nombre, direcciÛn, telÈfono y m·ximo n˙mero de aforo
 		(personas)
 	 
 	 */
@@ -36,13 +38,11 @@ public class Restuarante implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "restauranteReserva")
     private List<Reserva> reservasRestaurante= new ArrayList<Reserva>();
 	
-	
-	public Restuarante() {
+	public Restaurante() {
 		super();
 	}
 
-
-	public Restuarante(int id, String nombre, String direccion, String telefono, int aforo) {
+	public Restaurante(int id, String nombre, String direccion, String telefono, int aforo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -50,18 +50,13 @@ public class Restuarante implements Serializable {
 		this.telefono = telefono;
 		this.aforo = aforo;
 	}
-
-
-	public Restuarante(String nombre, String direccion, String telefono, int aforo) {
+	
+	public Restaurante(String nombre, String direccion, String telefono, int aforo) {
 		super();
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.aforo = aforo;
-	}
-	public Restuarante(String nombre) {
-		super();
-		this.nombre=nombre;
 	}
 
 
@@ -147,7 +142,7 @@ public class Restuarante implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Restuarante other = (Restuarante) obj;
+		Restaurante other = (Restaurante) obj;
 		if (aforo != other.aforo)
 			return false;
 		if (direccion == null) {
@@ -175,13 +170,10 @@ public class Restuarante implements Serializable {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Restuarante [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono
 				+ ", aforo=" + aforo + ", reservasRestaurante=" + reservasRestaurante + "]";
 	}
-	
-	
    
 }

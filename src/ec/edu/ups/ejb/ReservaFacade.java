@@ -14,7 +14,7 @@ import ec.edu.ups.entidades.Reserva;
 @Stateless
 public class ReservaFacade extends AbstractFacade<Reserva>{
 
-	@PersistenceContext(unitName = "RocanoOrtega-Telmo-Examen")
+	@PersistenceContext(unitName = "RocanoOrtega-Telmo-ExamenFinal")
 	private EntityManager em;
 	
     public ReservaFacade() {

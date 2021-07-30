@@ -19,7 +19,7 @@ import ec.edu.ups.entidades.Cliente;
 @Stateless
 public class ClienteFacade extends AbstractFacade<Cliente>{
 
-	@PersistenceContext(unitName = "RocanoOrtega-Telmo-Examen")
+	@PersistenceContext(unitName = "RocanoOrtega-Telmo-ExamenFinal")
 	private EntityManager em;
 
     public ClienteFacade() {
@@ -55,7 +55,6 @@ public class ClienteFacade extends AbstractFacade<Cliente>{
     	return lista;
 		
 	}
-	
 	
 
 }
